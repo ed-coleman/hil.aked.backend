@@ -5,6 +5,10 @@ const Article = require('../models/Article.model')
 
 // fetch all articles
 
+router.get('/', (req, res, next) => {
+  res.json('All good in here')
+})
+
 router.get('/work', async (req, res) => {
     try {
         const allArticles = await Article.find()

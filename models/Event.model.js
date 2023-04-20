@@ -12,13 +12,13 @@ const NewEventSchema = new Schema({
   city: String,
   day: {
     type: Number,
-    required: true,
+    required: false,
   },
   month: {
     type: Number,
     required: true,
   },
-  Year: {
+  year: {
     type: Number,
     requried: true,
   },

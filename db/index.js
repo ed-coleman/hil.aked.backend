@@ -7,7 +7,7 @@ mongoose.set('strictQuery', false)
 // If no env has been set, we dynamically set it to whatever the folder name was upon the creation of the app
 
 const MONGO_URI =
-  process.env.MONGODB_URI || "mongodb://localhost:27017/hil's_website";
+  process.env.MONGODB_URI || 'mongodb+srv://edcolemancode:soSqQiJTxeCxDQi3@hilakedcluster.ouivvbk.mongodb.net/test'
 
 mongoose
   .connect(MONGO_URI)

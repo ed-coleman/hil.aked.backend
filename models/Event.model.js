@@ -9,10 +9,13 @@ const NewEventSchema = new Schema({
     type: String,
     required: true,
   },
-  city: String,
+  city: {
+  type: String,
+  default: '-'
+  },
   day: {
     type: Number,
-    required: false,
+    required: true,
   },
   month: {
     type: Number,
@@ -22,7 +25,9 @@ const NewEventSchema = new Schema({
     type: Number,
     requried: true,
   },
-  link: String,
+  link: {String,
+    default: '-'
+  },
   time: String,
   image: String,
 });

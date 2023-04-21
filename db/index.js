@@ -1,13 +1,20 @@
 // ℹ️ package responsible to make the connection with mongodb
 // https://www.npmjs.com/package/mongoose
 const mongoose = require("mongoose");
+
+
+const dotenv = require('dotenv')
+dotenv.config('.env')
+
 mongoose.set('strictQuery', false)
 
 // ℹ️ Sets the MongoDB URI for our app to have access to it.
 // If no env has been set, we dynamically set it to whatever the folder name was upon the creation of the app
 
 const MONGO_URI =
-  process.env.MONGODB_URI || "mongodb://localhost:27017/hil's_website";
+  process.env.MONGODB_URI
+
+  console.log(MONGO_URI)
 
 mongoose
   .connect(MONGO_URI)

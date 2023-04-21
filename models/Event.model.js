@@ -22,6 +22,7 @@ const NewEventSchema = new Schema({
     type: Number,
     requried: true,
   },
+  link: String,
   time: String,
   image: String,
 });

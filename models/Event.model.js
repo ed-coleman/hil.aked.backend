@@ -23,10 +23,10 @@ const NewEventSchema = new Schema({
   },
   year: {
     type: Number,
-    requried: true,
+    required: true,
   },
-  link: {String,
-    default: '-'
+  link: {
+    String
   },
   time: String,
   image: String,

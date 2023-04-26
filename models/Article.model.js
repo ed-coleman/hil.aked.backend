@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const { stringify } = require("uuid");
 
 const NewArticleSchema = new Schema ({
     title: {
@@ -9,11 +10,17 @@ const NewArticleSchema = new Schema ({
         type: String,
     },
     year: {
-        type: Number
+        type: String,
+    },
+    month: {
+        type: String
     },
     image: String,
     link: String,
-    category: String,
+    category: {
+        type: String,
+        enum: ['report', 'chapter', 'article', 'journalism', 'investigation', 'op-ed', 'press']
+    },
 })
 
 const NewArticle = model("NewArticle", NewArticleSchema)

@@ -17,6 +17,7 @@ const NewArticleSchema = new Schema ({
     },
     image: String,
     link: String,
+    preview: String,
     category: {
         type: String,
         enum: ['report', 'chapter', 'article', 'journalism', 'investigation', 'op-ed', 'press']

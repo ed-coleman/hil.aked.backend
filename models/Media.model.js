@@ -16,6 +16,7 @@ const NewMediaSchema = new Schema ({
         type: String
     },
     link: String,
+    image: String,
     preview: String,
 })
 

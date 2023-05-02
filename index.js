@@ -20,6 +20,7 @@ const articleRoutes = require('./routes/articles.routes')
 app.use(articleRoutes)
 
 const mediaRoutes = require('./routes/media.routes')
+app.use(mediaRoutes)
 
 const PORT = process.env.PORT || 5000;
 

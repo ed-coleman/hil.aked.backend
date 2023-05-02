@@ -19,6 +19,8 @@ app.use(eventRoutes)
 const articleRoutes = require('./routes/articles.routes')
 app.use(articleRoutes)
 
+const mediaRoutes = require('./routes/media,routes')
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => console.log(`server started on port ${PORT}`));

@@ -1,5 +1,4 @@
 const { Schema, model } = require("mongoose");
-const { stringify } = require("uuid");
 
 const NewArticleSchema = new Schema ({
     title: {

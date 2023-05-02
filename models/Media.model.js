@@ -18,3 +18,7 @@ const NewMediaSchema = new Schema ({
     link: String,
     preview: String,
 })
+
+const NewMedia = model("NewMedia", NewMediaSchema);
+
+module.exports = NewMedia;

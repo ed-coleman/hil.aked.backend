@@ -7,9 +7,13 @@ const NewUserSchema = new Schema (
             required: true,
             unique: true,
         },
-        passwordHash: {
+        password: {
             type: String,
-            required: [true],
+            required: true,
+        },
+        email: {
+            type: String,
+            required: true,
         },
     }
 )

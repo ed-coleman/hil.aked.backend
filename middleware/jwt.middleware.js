@@ -12,8 +12,6 @@ const isAuthenticated = jwt({
 function getTokenFromHeaders(req) {
 
   // Check if the token is available on the request Headers
-  // 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Nzc1ODAyNTUsImRhdGEiOnsidXNlciI6eyJ1c2VybmFtZSI6Ikpvc2gifX0sImlhdCI6MTY3NzU3NjY1NX0.9LE1zfnTKd3wM2N_TqtAXzSUgaBgfdI8x-xPS2p2c-g'
- 
   if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
     // Get the encoded token string and return it
     const token = req.headers.authorization.split(' ')[1]

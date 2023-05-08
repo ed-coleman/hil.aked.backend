@@ -11,7 +11,16 @@ const app = express();
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
+
+const FRONTEND_URL = process.env.ORIGIN
+
 app.use(cors())
+
+app.use(
+    cors({
+      origin: [FRONTEND_URL]
+    })
+  );
 
 const eventRoutes = require('./routes/events.routes')
 app.use(eventRoutes)

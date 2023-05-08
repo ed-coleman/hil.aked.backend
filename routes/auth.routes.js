@@ -8,7 +8,7 @@ const { isAuthenticated } = require('../middleware/jwt.middleware')
 
 // verify user
 
-router.get ('/verify', isAuthenticated, (req, res) => {
+router.get ("/verify", isAuthenticated, (req, res) => {
     if (req.payload) {
       console.log(req.payload)
       res.json(req.payload)

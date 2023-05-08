@@ -22,6 +22,9 @@ app.use(articleRoutes)
 const mediaRoutes = require('./routes/media.routes')
 app.use(mediaRoutes)
 
+const authRoutes = require('./routes/auth.routes')
+app.use(authRoutes)
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => console.log(`server started on port ${PORT}`));

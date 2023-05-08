@@ -4,6 +4,16 @@ const User = require('../models/User.model')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const { isAuthenticated } = require('../middleware/jwt.middleware')
+
+/*router.get('/users', async (req, res) => {
+  try {
+      const allUsers = await User.find()
+      res.status(200).json(allUsers)
+      console.log('all users fetched successfully: ', allUsers)
+  } catch (error) {
+      console.log(error)
+  }
+})*/
  
 
 // verify user

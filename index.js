@@ -7,7 +7,7 @@ require('dotenv').config()
 
 const app = express();
 
-
+app.use(cors())
 
 const eventRoutes = require('./routes/events.routes')
 app.use(eventRoutes)

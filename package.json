@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index",
-    "dev": "nodemon index",
-    "proxy": "http://localhost:5173"
+    "dev": "nodemon index"
   },
   "keywords": [],
   "author": "",

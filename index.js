@@ -8,7 +8,11 @@ require('dotenv').config()
 
 const app = express();
 
-app.use(cors())
+const corsOptions = {
+    origin: '*git'
+}
+
+app.use(cors(corsOptions))
 
 
 

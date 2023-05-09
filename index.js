@@ -13,9 +13,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 
-app.use(cors({
-    origin: 'http://localhost:5173' || 'http://hilaked.com/'
-}))
+app.use(cors())
 
 
 const eventRoutes = require('./routes/events.routes')

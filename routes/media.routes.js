@@ -25,7 +25,7 @@ router.get('/media/:id', async (req, res) => {
     }
   })
 
-  // update a media article
+  // add a media article
 
   router.post('/media', async (req, res, next) => {
     const body = req.body

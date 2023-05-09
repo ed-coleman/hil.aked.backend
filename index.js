@@ -13,12 +13,6 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 
-app.use((req, res, next) => {
-res.header('Access-Control-Allow-Origin', '*')
-next()
-}
-)
-
 
 const eventRoutes = require('./routes/events.routes')
 app.use(eventRoutes)

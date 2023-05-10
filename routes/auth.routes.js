@@ -23,10 +23,10 @@ router.get('/users', async (req, res) => {
 
 // POST /auth/signup  - Creates a new user in the database
 router.post('/addUser', (req, res, next) => {
-  const { email, password, username } = req.body;
+  const { email, password } = req.body;
 
   // Check if the email or password or name is provided as an empty string 
-  if (email === '' || password === '' || username === '') {
+  if (email === '' || password === '') {
     res.status(400).json({ message: "Provide email, password and name" });
     return;
   }
@@ -61,15 +61,15 @@ router.post('/addUser', (req, res, next) => {
 
       // Create a new user in the database
       // We return a pending promise, which allows us to chain another `then` 
-      return User.create({ email, password: hashedPassword, username });
+      return User.create({ email, password: hashedPassword });
     })
     .then((createdUser) => {
       // Deconstruct the newly created user object to omit the password
       // We should never expose passwords publicly
-      const { email, username, _id } = createdUser;
+      const { email, _id } = createdUser;
     
       // Create a new object that doesn't expose the password
-      const user = { email, username, _id };
+      const user = { email, _id };
 
       // Send a json response containing the user object
       res.status(201).json({ user: user });
@@ -142,10 +142,10 @@ router.get('/verify', isAuthenticated, (req, res, next) => {       // <== CREATE
 
 // POST  /auth/login - Verifies email and password and returns a JWT
 router.post('/login', (req, res, next) => {
-  const { username, password, email } = req.body;
+  const { password, email } = req.body;
 
   // Check if email or password are provided as empty string 
-  if (username === '' || password === '') {
+  if (email === '' || password === '') {
     res.status(400).json({ message: "Provide email and password." });
     return;
   }
@@ -165,11 +165,11 @@ router.post('/login', (req, res, next) => {
 
       if (passwordCorrect) {
         // Deconstruct the user object to omit the password
-        const { _id, username } = foundUser;
+        const { _id, email } = foundUser;
         console.log('password correct')
         
         // Create an object that will be set as the token payload
-        const payload = { _id, username };
+        const payload = { _id, email };
 
         // Create and sign the token
         const authToken = jwt.sign( 

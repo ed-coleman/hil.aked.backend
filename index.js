@@ -2,15 +2,19 @@ const express = require("express");
 const cors = require('cors')
 
 
+
 require("./db")
 
 require('dotenv').config()
 
 const app = express();
+require("./config/index.js")(app)
 
+const corsOptions = {
+    origin: '*'
+}
 
-
-
+app.use(cors(corsOptions))
 
 
 

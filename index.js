@@ -8,12 +8,6 @@ require('dotenv').config()
 
 const app = express();
 
-const corsOptions = {
-    origin: '*'
-}
-
-app.use(cors(corsOptions))
-
 
 
 

@@ -142,8 +142,9 @@ router.get('/verify', isAuthenticated, (req, res, next) => {       // <== CREATE
 
 // POST  /auth/login - Verifies email and password and returns a JWT
 router.post('/login', (req, res, next) => {
-  const { password, email } = req.body;
   console.log(req.body)
+  const { password, email } = req.body;
+  
 
   // Check if email or password are provided as empty string 
   if (email === '' || password === '') {

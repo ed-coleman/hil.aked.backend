@@ -87,6 +87,29 @@ router.delete('/events/delete/:id', async (req,res) => {
   }
 })
 
+// get upcoming events 
+
+
+
+router.get('/pastEvents', async (req, res, next) => {
+  const filter = (event) => event.year > 2022
+  try {
+    // const allEvents = await Event.find(req.query)
+    const allEvents = await Event.find(filter(event))
+    res.status(200).json(allEvents)
+  } catch (error) {
+    res.json(error.status)
+    console.log(error.status)
+  }
+})
+
+
+
+
+
+
+
+
 
 
 

@@ -14,16 +14,16 @@ const NewEventSchema = new Schema({
   default: '-'
   },
   day: {
-    type: Number,
-    required: true,
+    type: String,
+
   },
   month: {
-    type: Number,
-    required: true,
+    type: String,
+  
   },
   year: {
     type: Number,
-    required: true,
+  
   },
   link: {
     String

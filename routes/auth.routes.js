@@ -66,77 +66,56 @@ router.post('/addUser', (req, res, next) => {
     });
 });
 
-
-
-// POST  /auth/login
-// ...
-
-
-// GET  /auth/verify
-// ...
-
 module.exports = router;
 
  
 
 // verify user
 
-router.get('/verify', isAuthenticated, (req, res, next) => {       // <== CREATE NEW ROUTE
+
+router.get ('/verify', isAuthenticated, (req, res) => {
+  if (req.payload) {
+    console.log(req.payload)
+    res.json(req.payload)
+  }
+  })
+
+router.post("/login", async (req, res) => {
+  //Check username
+  const matchedUserArr = await User.find({ userName: req.body.userName });
+
+  if (matchedUserArr.length) {
+    const currentUser = matchedUserArr[0];
+    //Check password
+    if (bcrypt.compareSync(req.body.passwordHash, currentUser.passwordHash)) {
+   
+
+      //Generate the JWT
  
-  // If JWT token is valid the payload gets decoded by the
-  // isAuthenticated middleware and made available on `req.payload`
-  console.log(`req.payload`, req.payload);
- 
-  // Send back the object with user data
-  // previously set as the token payload
-  res.status(200).json(req.payload);
+      delete currentUser._doc.passwordHash
+
+
+      const token = jwt.sign(
+        {
+          exp: Math.floor(Date.now() / 1000) + 60 * 60, // makes sure the token will expire after a set time
+          data: currentUser
+        },
+        process.env.TOKEN_SECRET
+      ); // adds a secret to the .env
+      res.json({ "token": token, userName: currentUser.userName })
+    } else {
+      res.status(403).json({ message: "Wrong password" });
+    }
+  } else {
+    res.status(404).json({ message: "User not found" });
+  }
 });
 
-    /*router.post("/login", async (req, res) => {
-        //Check username
-        const matchedUserArr = await User.find({ username: req.body.username });
-      
-        if (matchedUserArr.length) {
-          const currentUser = matchedUserArr[0];
-          //Check password
-          if (bcrypt.compareSync(req.body.passwordHash, currentUser.passwordHash)) {
-         
-      
-            //Generate the JWT
-       
-            delete currentUser._doc.passwordHash
-      
-      
-            const token = jwt.sign(
-              {
-                exp: Math.floor(Date.now() / 1000) + 60 * 60, // makes sure the token will expire after a set time
-                data: currentUser
-              },
-              process.env.TOKEN_SECRET
-            ); // adds a secret to the .env
-            res.json({ "token": token, username: currentUser.username })
-          } else {
-            res.status(403).json({ message: "Wrong password" });
-          }
-        } else {
-          res.status(404).json({ message: "User not found" });
-        }
-      });*/
-
-      // routes/auth.routes.js
-// ...
-
 // POST  /auth/login - Verifies email and password and returns a JWT
-router.post('/login', (req, res, next) => {
-  console.log(req.body)
+/* router.post('/login', (req, res, next) => {
+  console.log('backend req.body: ', req.body)
   const { password, email } = req.body;
   
-
-  // Check if email or password are provided as empty string 
-  if (email === '' || password === '') {
-    res.status(400).json({ message: "Provide email and password." });
-    return;
-  }
 
   // Check the users collection if a user with the same email exists
   User.findOne({ email })
@@ -158,6 +137,7 @@ router.post('/login', (req, res, next) => {
         
         // Create an object that will be set as the token payload
         const payload = { _id, email };
+        console.log('payload: ', payload)
 
         // Create and sign the token
         const authToken = jwt.sign( 
@@ -179,6 +159,8 @@ router.post('/login', (req, res, next) => {
 
 
 // ...
+
+*/
 
 
 

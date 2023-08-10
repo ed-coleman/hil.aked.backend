@@ -73,7 +73,7 @@ router.put('/work/update/:id', async (req, res) => {
     const body = req.body
     const selectedArticle = req.params.id
     try{
-      const updatedArticle = await Event.findByIdAndUpdate(selectedArticle, body, {new: true})
+      const updatedArticle = await Article.findByIdAndUpdate(selectedArticle, body, {new: true})
       res.json(updatedArticle)
     } catch (error) {
       console.log(error)

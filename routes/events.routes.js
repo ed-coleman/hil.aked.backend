@@ -67,7 +67,7 @@ router.post('/events', async (req, res, next) => {
 
 router.put('/events/update/:id', async (req, res) => {
   const body = req.body
-  const selectedEvent = req.params.id
+  const selectedEvent = req.params.title
   try{
     const updatedEvent = await Event.findByIdAndUpdate(selectedEvent, body, {new: true})
     res.json(updatedEvent)

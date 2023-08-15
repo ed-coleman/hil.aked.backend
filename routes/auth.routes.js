@@ -42,12 +42,11 @@ router.post('/addUser', (req, res, next) => {
       }
 
       // If the email is unique, proceed to hash the password
-      const salt = bcrypt.genSaltSync(saltRounds);
-      const hashedPassword = bcrypt.hashSync(password, salt);
+   
 
       // Create a new user in the database
       // We return a pending promise, which allows us to chain another `then` 
-      return User.create({ email, password: hashedPassword });
+      return User.create({ email, password });
     })
     .then((createdUser) => {
       // Deconstruct the newly created user object to omit the password
@@ -82,18 +81,15 @@ router.get ('/verify', isAuthenticated, (req, res) => {
 
 router.post("/login", async (req, res) => {
   //Check username
-  const matchedUserArr = await User.find({ userName: req.body.userName });
+  const matchedUserArr = await User.find({ email: req.body.email });
+  console.log('email: ', req.body.email, 'password: ', req.body.password, 'matchedUserArr: ', matchedUserArr)
 
   if (matchedUserArr.length) {
     const currentUser = matchedUserArr[0];
+    console.log('Current User: ', currentUser)
     //Check password
-    if (bcrypt.compareSync(req.body.passwordHash, currentUser.passwordHash)) {
-   
-
-      //Generate the JWT
- 
-      delete currentUser._doc.passwordHash
-
+    if (req.body.password === currentUser.password) {
+    //Generate the JWT
 
       const token = jwt.sign(
         {
@@ -102,7 +98,8 @@ router.post("/login", async (req, res) => {
         },
         process.env.TOKEN_SECRET
       ); // adds a secret to the .env
-      res.json({ "token": token, userName: currentUser.userName })
+      res.status(201)
+      res.json({ "token": token, email: currentUser.email })
     } else {
       res.status(403).json({ message: "Wrong password" });
     }
@@ -110,6 +107,8 @@ router.post("/login", async (req, res) => {
     res.status(404).json({ message: "User not found" });
   }
 });
+
+
 
 // POST  /auth/login - Verifies email and password and returns a JWT
 /* router.post('/login', (req, res, next) => {

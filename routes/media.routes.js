@@ -40,17 +40,19 @@ router.get('/media/:id', async (req, res) => {
   })
   
   // update media article 
-  
+ 
   router.put('/media/update/:id', async (req, res) => {
-    const body = req.body
-    const selectedMedia = req.params.id
-    try{
-      const updatedMedia = await Media.findByIdAndUpdate(selectedMedia, body, {new: true})
-      res.json(updatedMedia)
+    const body = req.body;
+    const selectedMedia = req.params.id;
+    try {
+      const updatedMedia = await Media.findByIdAndUpdate(selectedMedia, body, { new: true });
+      if (!updatedMedia) return res.status(404).send('Media not found');
+      res.json(updatedMedia);
     } catch (error) {
-      console.log(error)
+      console.log(error);
+      res.status(500).send('Server Error');
     }
-  })
+  });
   
   // delete a media article
   

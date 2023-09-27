@@ -49,6 +49,18 @@ router.post("/addUser", (req, res, next) => {
     });
 });
 
+router.post('/newUser', async (req, res, next) => {
+  const body = req.body
+  console.log(req.body)
+  try {
+    const user = await User.create({...body})
+    console.log(user)
+    res.json(user)
+  } catch (error) {
+    console.log(error)
+  }
+})
+
 module.exports = router;
 
 // verify user

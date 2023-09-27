@@ -70,26 +70,32 @@ try {
 // update an article 
 
 router.put('/work/update/:id', async (req, res) => {
-    const body = req.body
-    const selectedArticle = req.params.title
-    try{
-      const updatedArticle = await Article.findByIdAndUpdate(selectedArticle, body, {new: true})
-      res.json(updatedArticle)
-    } catch (error) {
-      console.log(error)
-    }
-  })
+  const body = req.body;
+  const selectedArticle = req.params.id; // Corrected this line
+  try {
+      const updatedArticle = await Article.findByIdAndUpdate(selectedArticle, body, { new: true });
+      if(!updatedArticle) return res.status(404).send('Article not found');
+      res.json(updatedArticle);
+  } catch (error) {
+      console.log(error);
+      res.status(500).send('Server Error'); // Send a response in case of error
+  }
+});
 
-  router.put('/media/update/:id', async (req, res) => {
-    const body = req.body
-    const selectedMedia = req.params.id
-    try{
-      const updatedMedia = await Media.findByIdAndUpdate(selectedMedia, body, {new: true})
-      res.json(updatedMedia)
-    } catch (error) {
-      console.log(error)
-    }
-  })
+
+router.put('/media/update/:id', async (req, res) => {
+  const body = req.body;
+  const selectedMedia = req.params.id;
+  try {
+    const updatedMedia = await Media.findByIdAndUpdate(selectedMedia, body, { new: true });
+    if (!updatedMedia) return res.status(404).send('Media not found');
+    res.json(updatedMedia);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send('Server Error');
+  }
+});
+
   
   // delete an article 
   

@@ -81,10 +81,6 @@ router.put('/work/update/:id', async (req, res) => {
       res.status(500).send('Server Error'); // Send a response in case of error
   }
 });
-
-
-
-
   
   // delete an article 
   
